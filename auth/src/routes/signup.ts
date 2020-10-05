@@ -6,6 +6,7 @@ import { User } from '../models/user';
 
 import { RequestValidationError } from '../errors/request-validation-error';
 import { BadRequestError } from '../errors/bad-request-error';
+import { validateRequest } from '../middlewares/validate-request';
 const router = express.Router();
 
 router.post(
@@ -17,13 +18,8 @@ router.post(
       .isLength({ min: 4, max: 20 })
       .withMessage('Password must be between 4 and 20 characters'),
   ],
+  validateRequest,
   async (req: Request, res: Response, next: NextFunction) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      throw new RequestValidationError(errors.array());
-    }
-
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
@@ -41,9 +37,8 @@ router.post(
         id: user.id,
         email: user.email,
       },
-      'as'
+      process.env.JWT_KEY!
     );
-    //sd
 
     // Store it on session object
     req.session = { jwt: userJWT };
