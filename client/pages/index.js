@@ -4,7 +4,7 @@ const LandingPage = ({ currentUser }) => {
   console.log(currentUser);
   return <h1>Landing Page</h1>;
 };
-
+//test
 LandingPage.getInitialProps = async ({ req }) => {
   if (typeof window === 'undefined') {
     // we are on the server!
