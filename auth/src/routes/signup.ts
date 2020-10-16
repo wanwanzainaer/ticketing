@@ -1,12 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
-
 import { User } from '../models/user';
+import { BadRequestError, validateRequest } from '@hsctickets/common';
 
-import { RequestValidationError } from '../errors/request-validation-error';
-import { BadRequestError } from '../errors/bad-request-error';
-import { validateRequest } from '../middlewares/validate-request';
 const router = express.Router();
 
 router.post(
