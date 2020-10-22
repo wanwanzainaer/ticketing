@@ -33,15 +33,21 @@ it('return 401 if the user does not own the ticket', async () => {
 });
 
 it('return 400 if the user provide invalid title or price', async () => {
+  const cookie = global.signin();
   const response = await request(app)
     .post('/api/tickets')
-    .set('Cookie', global.signin())
+    .set('Cookie', cookie)
     .send({ title: 'test', price: 20 });
 
   await request(app)
     .put(`/api/tickets/${response.body.id}`)
-    .set('Cookie', global.signin())
+    .set('Cookie', cookie)
     .send({ price: 1000 })
+    .expect(400);
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set('Cookie', cookie)
+    .send({ price: -10 })
     .expect(400);
 });
 
