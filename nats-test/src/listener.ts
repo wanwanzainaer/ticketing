@@ -31,6 +31,6 @@ stan.on('connect', () => {
     msg.ack();
   });
 });
-
+// here for the return
 process.on('SIGINT', () => stan.close());
 process.on('SIGTERM', () => stan.close());
