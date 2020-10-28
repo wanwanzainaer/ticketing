@@ -15,7 +15,11 @@ stan.on('connect', () => {
     process.exit();
   });
 
-  const options = stan.subscriptionOptions().setManualAckMode(true);
+  const options = stan
+    .subscriptionOptions()
+    .setManualAckMode(true)
+    .setDeliverAllAvailable()
+    .setDurableName('accounting-services');
   const subscription = stan.subscribe(
     'ticket:created',
     'orders-service-queue-group',
@@ -31,6 +35,6 @@ stan.on('connect', () => {
     msg.ack();
   });
 });
-// here for the return
+
 process.on('SIGINT', () => stan.close());
 process.on('SIGTERM', () => stan.close());
