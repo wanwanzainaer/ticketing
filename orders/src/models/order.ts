@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import { OrderStatus } from '@hsctickets/common';
 import { TicketDoc } from './ticket';
+
+//For test
 interface OrderAttrs {
   userId: string;
   status: OrderStatus;
