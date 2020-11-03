@@ -59,3 +59,5 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
 const Order = mongoose.model<OrderDoc, OrderModel>('Orders', orderSchema);
 
 export { Order };
+
+export { OrderStatus } from '@hsctickets/common';
