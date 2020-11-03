@@ -17,6 +17,7 @@ interface OrderDoc extends mongoose.Document {
   ticket: TicketDoc;
 }
 
+//for git commit
 interface OrderModel extends mongoose.Model<OrderDoc> {
   build(attrs: OrderAttrs): OrderDoc;
 }
