@@ -19,7 +19,7 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
 const ticketSchema = new mongoose.Schema(
   {
     title: {
-      tpye: String,
+      type: String,
       required: true,
     },
     price: {
